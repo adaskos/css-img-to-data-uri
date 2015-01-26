@@ -57,6 +57,16 @@ If set to true, it throws an error when the same image found twice, so the grunt
 #### options.missingFiles
 Type: `Boolean`
 
+#### options.forceEnquote
+Type: `Char`
+
+Set to any character to replace quoted uri values with specific quotes, e.g ', " or empty string to strip quotes from value. Default behavior is to keep the existing quotes if any.
+
+#### options.pathAsComment
+Type: `Boolean`
+
+Set to true to keep the replace uri path in a comment, for reference.
+
 If set to true and a missing entry if thrown while reading the local image, the error will be consumed and not thrown. The uri will remain intact.
 
 ## Contributing

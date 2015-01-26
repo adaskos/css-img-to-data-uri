@@ -17,16 +17,16 @@ module.exports = function (grunt) {
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
     grunt.registerTask('css_img_2_data_uri', desc, function () {
-        var options = this.options(),
-            files = options.files,
-            filesLen = files.length,
+        var options = this.options();
+        var files = options.files;
+        var filesLen = files.length,
             done = this.async(),
             doneCounter = 0;
 
         files.forEach(function (f) {
-            build(f.src, options, function (css, duplicates) {
-
-                if (duplicates.length) {
+            build(f.src, options, function (err, css, duplicates) {
+                if (err) throw err;
+                if (duplicates && duplicates.length) {
                     if (options.throwOnDuplicate) {
                         throw new Error('possible duplicated images in the following lines: '
                                         + duplicates.join(', '));
@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                 doneCounter += 1;
 
                 if (doneCounter === filesLen) {
-                    grunt.log.writeln("All file written");
+                    grunt.log.writeln("All files written");
                     done();
                 }
             });

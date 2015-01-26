@@ -99,4 +99,63 @@ test.register('test file missing not allowed (explicit)', function (done) {
 	});
 });
 
+
+test.register('test maintaining quotes around value', function (done) {
+	css_img_2_data_uri(__dirname + '/css/d.css', {}, function (err, txt) {
+		assert.ifError(err);
+		fs.readFile(__dirname + '/expect/d.css', function (err, data) {
+			if (err) {
+				throw err;
+			};
+
+			assert.deepEqual(data.toString('utf8'), txt);
+			done();
+		});
+	});
+});
+
+
+test.register('test forced quotes around value', function (done) {
+	css_img_2_data_uri(__dirname + '/css/d.css', {forceEnquote:"'"}, function (err, txt) {
+		assert.ifError(err);
+		fs.readFile(__dirname + '/expect/d2.css', function (err, data) {
+			if (err) {
+				throw err;
+			};
+
+			assert.deepEqual(data.toString('utf8'), txt);
+			done();
+		});
+	});
+});
+
+
+test.register('test strip quotes from value', function (done) {
+	css_img_2_data_uri(__dirname + '/css/d.css', {forceEnquote:''}, function (err, txt) {
+		assert.ifError(err);
+		fs.readFile(__dirname + '/expect/d3.css', function (err, data) {
+			if (err) {
+				throw err;
+			};
+
+			assert.deepEqual(data.toString('utf8'), txt);
+			done();
+		});
+	});
+});
+
+test.register('test add uri in comment', function (done) {
+	css_img_2_data_uri(__dirname + '/css/e.css', {pathAsComment:true, missingFiles: true}, function (err, txt) {
+		assert.ifError(err);
+		fs.readFile(__dirname + '/expect/e.css', function (err, data) {
+			if (err) {
+				throw err;
+			};
+
+			assert.deepEqual(data.toString('utf8'), txt);
+			done();
+		});
+	});
+});
+
 test.run();

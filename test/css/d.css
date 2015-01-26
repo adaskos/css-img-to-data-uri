@@ -1,0 +1,9 @@
+a.test1 {
+    background-image: url('spacer2.gif');
+}
+a.test2 {
+    background-image: url("spacer2.gif");
+}
+a.test3 {
+    background-image: url(spacer2.gif);
+}
