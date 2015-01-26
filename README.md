@@ -57,6 +57,8 @@ If set to true, it throws an error when the same image found twice, so the grunt
 #### options.missingFiles
 Type: `Boolean`
 
+If set to true and a missing entry is thrown while reading the local image, the error will be consumed and not thrown. The uri will remain intact.
+
 #### options.forceEnquote
 Type: `Char`
 
@@ -65,9 +67,7 @@ Set to any character to replace quoted uri values with specific quotes, e.g ', "
 #### options.pathAsComment
 Type: `Boolean`
 
-Set to true to keep the replace uri path in a comment, for reference.
-
-If set to true and a missing entry if thrown while reading the local image, the error will be consumed and not thrown. The uri will remain intact.
+If set to true the replaced uri path is kept in a comment, for reference.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
