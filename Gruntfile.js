@@ -29,6 +29,14 @@ module.exports = function (grunt) {
                     {
                         src: 'test/css/b.css',
                         dest: 'tmp/b.css'
+                    },
+                    {
+                        src: 'test/css/c.css',
+                        dest: 'tmp/c.css'
+                    },
+                    {
+                        src: 'test/css/missingfile.css',
+                        dest: 'tmp/missingfile.css'
                     }
                 ]
             }
@@ -54,7 +62,7 @@ module.exports = function (grunt) {
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'execute', 'css_img_2_data_uri', 'clean']);
+    grunt.registerTask('test', ['clean', 'execute'/*, 'css_img_2_data_uri'*/, 'clean']);
 
     // By default, lint and run all tests.
     grunt.registerTask('default', ['jslint',  'test']);

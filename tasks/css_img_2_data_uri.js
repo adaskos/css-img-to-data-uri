@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             doneCounter = 0;
 
         files.forEach(function (f) {
-            build(f.src, function (css, duplicates) {
+            build(f.src, options, function (css, duplicates) {
 
                 if (duplicates.length) {
                     if (options.throwOnDuplicate) {

@@ -54,5 +54,10 @@ Type: `Boolean`
 
 If set to true, it throws an error when the same image found twice, so the grunt build would stop.
 
+#### options.missingFiles
+Type: `Boolean`
+
+If set to true and a missing entry if thrown while reading the local image, the error will be consumed and not thrown. The uri will remain intact.
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

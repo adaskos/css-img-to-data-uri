@@ -35,7 +35,8 @@ var test = (function () {
 }());
 
 test.register('test multiline css processing', function (done) {
-	css_img_2_data_uri(__dirname + '/css/a.css', function (txt, duplicates) {
+	css_img_2_data_uri(__dirname + '/css/a.css', {}, function (err, txt, duplicates) {
+		assert.ifError(err);
 		fs.readFile(__dirname + '/expect/a.css', function (err, data) {
 			if (err) {
 				throw err;
@@ -48,7 +49,8 @@ test.register('test multiline css processing', function (done) {
 });
 
 test.register('test oneliner css processing', function (done) {
-	css_img_2_data_uri(__dirname + '/css/b.css', function (txt, duplicates) {
+	css_img_2_data_uri(__dirname + '/css/b.css', {}, function (err, txt, duplicates) {
+		assert.ifError(err);
 		fs.readFile(__dirname + '/expect/b.css', function (err, data) {
 			if (err) {
 				throw err;
@@ -61,10 +63,38 @@ test.register('test oneliner css processing', function (done) {
 });
 
 test.register('test finding duplicates', function (done) {
-	css_img_2_data_uri(__dirname + '/css/c.css', function (txt, duplicates) {
+	css_img_2_data_uri(__dirname + '/css/c.css', {}, function (err, txt, duplicates) {
+		assert.ifError(err);
 		assert.deepEqual(typeof duplicates, 'object');
 		assert.deepEqual(duplicates.length, 1);
 		assert.deepEqual(duplicates[0], 7);
+		done();
+	});
+});
+
+
+test.register('test file missing allowed', function (done) {
+	css_img_2_data_uri(__dirname + '/css/missingfile.css', {missingFiles: true}, function (err, txt, duplicates) {
+		fs.readFile(__dirname + '/expect/missingfile.css', function (err, data) {
+			assert.ifError(err);
+			assert.deepEqual(data.toString('utf8'), txt);
+			done();
+		});
+	});
+});
+
+
+test.register('test file missing not allowed (default)', function (done) {
+	css_img_2_data_uri(__dirname + '/css/missingfile.css', null, function(err) {
+		if (!err) throw 'Missing expected error';
+		if (!/ENOENT/.test(err)) throw err;
+		done();
+	});
+});
+test.register('test file missing not allowed (explicit)', function (done) {
+	css_img_2_data_uri(__dirname + '/css/missingfile.css', {missingFiles: false}, function(err) {
+		if (!err) throw 'Missing expected error';
+		if (!/ENOENT/.test(err)) throw err;
 		done();
 	});
 });
