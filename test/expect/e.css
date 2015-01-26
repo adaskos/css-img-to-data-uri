@@ -2,8 +2,12 @@ a {
     background-image: url('data:image/gif;base64,R0lGODlhAQABAIABANvf7////yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==') /*spacer2.gif*/;
 }
 div {
-    background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==') /*spacer.gif*/;
+    background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==') /*spacer.gif*/ /*other comment*/;
 }
 span {
-    background-image: url('spacer3.gif');
+    background-image: url('spacer3.gif') /*other comment*/;
+}
+
+div {
+	background: url('data:image/gif;base64,R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==') /*spacer.gif*/ no-repeat center 2px; /*other comment*/;
 }

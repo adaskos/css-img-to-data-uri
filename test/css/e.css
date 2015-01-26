@@ -2,8 +2,12 @@ a {
     background-image: url('spacer2.gif');
 }
 div {
-    background-image: url('spacer.gif');
+    background-image: url('spacer.gif') /*spacer.gif*/ /*other comment*/;
 }
 span {
-    background-image: url('spacer3.gif');
+    background-image: url('spacer3.gif') /*other comment*/;
+}
+
+div {
+	background: url('spacer.gif') no-repeat center 2px; /*other comment*/;
 }
