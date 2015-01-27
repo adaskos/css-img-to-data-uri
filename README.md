@@ -67,7 +67,12 @@ Set to any character to replace quoted uri values with specific quotes, e.g ', "
 #### options.pathAsComment
 Type: `Boolean`
 
-If set to true the replaced uri path is kept in a comment, for reference.
+If set to true the replaced uri path is kept in a comment, for reference or refreshing. Note: if refresh option is used you still need to use pathAsComment to maintain the value.
+
+#### options.refressh
+Type: `Boolean`
+
+If set to true and the url is followed by a file path, its content will be re-encoded. Used in case the file has changed. Combine with pathAsComment to be able to refresh again and again. Useful if css has embedded images using Visual Studio's Web Essentials. The comment must follow the url, after a single space. Comments not pointing to a valid file will be ignored and left intact. If a comment matches the url it's not duplicated.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

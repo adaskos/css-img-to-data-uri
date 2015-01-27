@@ -1,0 +1,12 @@
+a.already.butnocomment {
+    background-image: url('data:image/gif;base64,R0lGODlhAQABAIABANvf7////yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+}
+a.already.butnovalidcomment {
+    background-image: url('data:image/gif;base64,R0lGODlhAQABAIABANvf7////yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==') /*just a random comment*/;
+}
+a.already {
+    background-image: url('data:image/gif;base64,R0lGODlhAQABAIABANvf7////yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==') /*spacer.gif*/ /*notice it'a different file*/;
+}
+a.stayintact {
+    background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==') /*spacer.gif*/;
+}

@@ -158,4 +158,18 @@ test.register('test add uri in comment', function (done) {
 	});
 });
 
+test.register('test refresh from comment', function (done) {
+	css_img_2_data_uri(__dirname + '/css/f.css', {pathAsComment:true, missingFiles: true, refresh: true}, function (err, txt) {
+		assert.ifError(err);
+		fs.readFile(__dirname + '/expect/f.css', function (err, data) {
+			if (err) {
+				throw err;
+			};
+
+			assert.deepEqual(data.toString('utf8'), txt);
+			done();
+		});
+	});
+});
+
 test.run();
