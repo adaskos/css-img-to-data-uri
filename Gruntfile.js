@@ -10,6 +10,8 @@
 module.exports = function (grunt) {
     'use strict';
 
+    var opts = {missingFiles: true, pathAsComment: true, refresh: true, reportDuplicates: false};
+
     // Project configuration.
     grunt.initConfig({
         jslint: {
@@ -18,42 +20,45 @@ module.exports = function (grunt) {
                 'tasks/*.js'
             ]
         },
-
         css_img_2_data_uri: {
-            options: {
-                missingFiles: true,
-                pathAsComment: true,
-                refresh: true,
-                files: [
-                    {
-                        src: 'test/css/a.css',
-                        dest: 'tmp/a.css'
-                    },
-                    {
-                        src: 'test/css/b.css',
-                        dest: 'tmp/b.css'
-                    },
-                    {
-                        src: 'test/css/c.css',
-                        dest: 'tmp/c.css'
-                    },
-                    {
-                        src: 'test/css/missingfile.css',
-                        dest: 'tmp/missingfile.css'                        
-                    },
-                    {
-                        src: 'test/css/d.css',
-                        dest: 'tmp/d2.css'
-                    },
-                    {
-                        src: 'test/css/e.css',
-                        dest: 'tmp/e.css'
-                    },
-                    {
-                        src: 'test/css/f.css',
-                        dest: 'tmp/f.css'
-                    }
-                ]
+            a: {
+                files: [{
+                    src: 'test/css/a.css',
+                    dest: 'tmp/a.css'
+                }], options: opts
+            }, b: {
+                files: [{
+                    expand: true,
+                    src: 'test/css/b*.css',
+                    dest: 'tmp/'
+                }], options: opts
+            }
+            , cd: {
+                files: [{
+                    expand: true,
+                    src: 'test/css/{c,d}.css',
+                    dest: 'tmp'
+                }], options: opts
+            }
+            , mf: {
+                files: [{
+                    expand:true, 
+                    cwd: 'test/css', 
+                    src: 'miss*.css', 
+                    dest: 'tmp'
+                }], options: opts
+            }
+            , ef: {
+                files: [{
+                    expand:true, 
+                    src: ['test/css/e.css','test/css/f.css'],
+                    dest: 'tmp',
+                }], options: opts
+            }, dict: {
+                files : {
+                    'tmp/aa.css': 'test/css/a.css', //dest:src
+                    'tmp/b.css': 'test/css/b.css'
+                }, options: opts
             }
         },
 
@@ -81,5 +86,4 @@ module.exports = function (grunt) {
 
     // By default, lint and run all tests.
     grunt.registerTask('default', ['jslint',  'test']);
-
-};
+    };

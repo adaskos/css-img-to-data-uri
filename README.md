@@ -23,20 +23,25 @@ grunt.loadNpmTasks('grunt-css-img-2-data-uri');
 In your project's Gruntfile, add a section named `css_img_2_data_uri` to the data object passed into `grunt.initConfig()`.
 
 ```js
-grunt.initConfig({
-	throwOnDuplicate: true,
+grunt.initConfig({	
     css_img_2_data_uri: {
-        options: {
-            files: [
-                {
-                    src: 'path/to/source.css',
-                    dest: 'path/to/output.css'
-                },
-                {
-                    src: 'path/to/another/source.css',
-                    dest: 'path/to/another/output.css'
-                }
-            ]
+        debug: {
+            files: [{
+                expand: true,
+                src: 'src/*.css',
+                dest: 'debug'
+            }], options: {
+                missingFiles: true,
+                 pathAsComment: true, 
+                 refresh: true, 
+                 reportDuplicates: false
+             }
+        }, 
+        release: {
+            files: {
+                src: 'src/main.css' : 'release/main.css', //dest:src
+                src: 'src/reset.css' : 'release/reset.css',
+            }
         }
     }
 })
@@ -54,10 +59,15 @@ Type: `Boolean`
 
 If set to true, it throws an error when the same image found twice, so the grunt build would stop.
 
+#### options.reportDuplicates
+Type: `Boolean`
+
+If set to true (and throwOnDuplicate is not true), it will report the possible duplicates (as line numbers). Set to false to suppress messages. Default value: true
+
 #### options.missingFiles
 Type: `Boolean`
 
-If set to true and a missing entry is thrown while reading the local image, the error will be consumed and not thrown. The uri will remain intact.
+If set to true and a missing entry is thrown while reading a local image, the error will be consumed and not thrown. The uri will remain intact. 
 
 #### options.forceEnquote
 Type: `Char`
@@ -67,12 +77,12 @@ Set to any character to replace quoted uri values with specific quotes, e.g ', "
 #### options.pathAsComment
 Type: `Boolean`
 
-If set to true the replaced uri path is kept in a comment, for reference or refreshing. Note: if refresh option is used you still need to use pathAsComment to maintain the value.
+If set to true the replaced uri path is kept in a comment, for reference or refreshing. Note: if refresh option is used you still need to use pathAsComment to maintain the value. Default value: false
 
-#### options.refressh
+#### options.refresh
 Type: `Boolean`
 
-If set to true and the url is followed by a file path, its content will be re-encoded. Used in case the file has changed. Combine with pathAsComment to be able to refresh again and again. Useful if css has embedded images using Visual Studio's Web Essentials. The comment must follow the url, after a single space. Comments not pointing to a valid file will be ignored and left intact. If a comment matches the url it's not duplicated.
+If set to true and the url is followed by a file path, its content will be re-encoded. Used in case the file has changed. Combine with pathAsComment to be able to refresh again and again. Useful if css has embedded images using Visual Studio's Web Essentials. The comment must follow the url, after a single space. Comments not pointing to a valid file will be ignored and left intact. If a comment matches the url it's not duplicated. Default value: false
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
